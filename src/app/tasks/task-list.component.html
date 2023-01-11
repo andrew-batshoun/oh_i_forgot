@@ -15,22 +15,21 @@
               
             </tr>
           </thead>
-          <tbody>
-            <tr >
+          <tbody *ngIf="tasks.length">
+            <tr *ngFor="let task of tasks">
               
-              <td></td>
-              <td></td>
-              <td><input type="checkbox" ng-change="showRemove()"
-                ng-model="checkSelected"></td>
+              <td>{{task.id}}</td>
+              <td>{{task.description}}</td>
+              <td *ngIf="task.date">{{task.date | date: 'shortDate'}}</td>
+              <td><input type="checkbox" (change) = "checkedBox()"/></td>
               <td>
-                <div ng-show="checkSelected">
-                    <button type="button" ng-click="ctrl.remove(currentTask.id)"
+                <div *ngIf="showRemove" >
+                    <button  type="button" 
                         class="btn btn-danger custom-width">Remove</button>
                 </div>
               </td>
               <td>
-                <button class="btn btn-outline-primary btn-sm"
-                        >
+                <button class="btn btn-outline-primary btn-sm">
                   Edit
                 </button>
               </td>
@@ -46,3 +45,4 @@
        class="alert alert-danger">
     
   </div>
+  <app-add-task></app-add-task>

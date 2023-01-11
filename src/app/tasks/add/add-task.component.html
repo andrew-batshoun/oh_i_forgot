@@ -1,0 +1,52 @@
+<!-- Activates Model for adding a task, will not show when editing task -->
+<input  class="btn btn-primary" id="addTask"
+value="New Task" type="button" >
+
+<!--Model for adding task  -->
+
+    <div class="card card-body">
+        <div class="panel panel-default">
+
+            <!--Form for adding task in Model -->
+            <div class="formcontainer">
+                <form  name="taskForm"
+                    class="form-horizontal">
+                    <input type="hidden"  />
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="description">Description</label>
+                            <div class="col-md-7">
+                                <input type="text" 
+                                    id="description" class=" form-control input-sm"
+                                    placeholder="Enter a task description" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="date">Due
+                                Date</label>
+                            <div class="col-md-7">
+                                <input type="date"  id="date"
+                                    class="form-control input-sm"
+                                    placeholder="Enter a due date. " />
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-actions floatRight">
+                            <input type="submit" id="submitTask" value="Add"
+                                class="btn btn-primary btn-sm">
+                            <button type="button" 
+                                class="btn btn-warning btn-sm"
+                               >Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+

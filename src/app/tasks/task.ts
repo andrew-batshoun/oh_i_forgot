@@ -5,8 +5,3 @@ export interface Task{
     description: string;
     date: Date;
 }
-
-export interface TaskResolved{
-    task: Task | null; 
-    error?: string; 
-}
