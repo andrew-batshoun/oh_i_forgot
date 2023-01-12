@@ -3,5 +3,5 @@
 export interface Task{
     id: number | null; 
     description: string;
-    date: Date;
+    dueDate: string;
 }

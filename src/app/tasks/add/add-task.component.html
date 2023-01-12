@@ -1,9 +1,11 @@
 <!-- Activates Model for adding a task, will not show when editing task -->
 <input  class="btn btn-primary" id="addTask"
-value="New Task" type="button" >
+value="New Task" type="button" data-bs-toggle="collapse"
+data-bs-target="#collapseCreateTask" aria-expanded="false"
+aria-controls="collapseCreateTask">
 
 <!--Model for adding task  -->
-
+<div class="collapse" id="collapseCreateTask">
     <div class="card card-body">
         <div class="panel panel-default">
 
@@ -48,5 +50,6 @@ value="New Task" type="button" >
         </div>
 
     </div>
+</div>
 
 

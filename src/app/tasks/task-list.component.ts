@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Task } from './task';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -7,29 +9,25 @@ import { Task } from './task';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  showRemove = false;
-
-  tasks: Task[]=[
-    {
-      "id": 1,
-      "description": "Get Groceries",
-      "date": new Date(2022, 12, 1)
-    },
-
-    {
-      "id": 1,
-      "description": "Walk The dog",
-      "date": new Date('') 
-    }
-  ]
+  errorMessage: string = "";
+  sub!: Subscription;
   
-  constructor() { }
+  constructor(private taskService: TaskService) { }
+  
+  tasks: Task[]=[];
+  
 
   ngOnInit(): void {
+   this.sub = this.taskService.getTasks().subscribe({
+      next: tasks => this.tasks = tasks, 
+      error: err => this.errorMessage = err
+      
+    });
   }
 
-  checkedBox(){
-    this.showRemove = !this.showRemove;
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
  
 }
+ 

@@ -9,7 +9,7 @@
 
               <th>Id</th>
               <th>Description</th>
-              <th>Date</th>
+              <th>Due Date</th>
               <th></th>
               <th></th>
               
@@ -20,10 +20,10 @@
               
               <td>{{task.id}}</td>
               <td>{{task.description}}</td>
-              <td *ngIf="task.date">{{task.date | date: 'shortDate'}}</td>
-              <td><input type="checkbox" (change) = "checkedBox()"/></td>
+              <td >{{task.dueDate }}</td>
+              <td><input type="checkbox" /></td>
               <td>
-                <div *ngIf="showRemove" >
+                <div  >
                     <button  type="button" 
                         class="btn btn-danger custom-width">Remove</button>
                 </div>
