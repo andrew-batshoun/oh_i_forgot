@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Task } from "./task";
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Observable, catchError, tap, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, catchError, tap, map, throwError} from 'rxjs';
 
 
 @Injectable({
@@ -18,6 +18,36 @@ export class TaskService{
         tap(data => console.log('All', JSON.stringify(data))),
         catchError(this.handleError)
        );
+    }
+
+    saveTask(task: Task): Observable<Task>{
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post<Task>(this.taskUrl, task, {headers})
+        .pipe(
+            tap(data => console.log('created task: ' + JSON.stringify(data))),
+            catchError(this.handleError)
+        );
+    }
+
+    updateTask(task: Task): Observable<Task>{
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        const url = `${this.taskUrl}/${task.id}`;
+        return this.http.put<Task>(url, task, {headers})
+        .pipe(
+            tap(() => console.log('updated task: ' + task.id)),
+            map(() => task),
+            catchError(this.handleError)
+        );
+    }
+
+    deleteTask(id: number): Observable<{}>{
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        const url = `${this.taskUrl}/${id}`;
+        return this.http.delete<Task>(url, {headers})
+        .pipe(
+            tap(data => console.log('deleted Task: ' + id)),
+            catchError(this.handleError)
+        );
     }
 
     private handleError(err: HttpErrorResponse){

@@ -11,16 +11,22 @@ aria-controls="collapseCreateTask">
 
             <!--Form for adding task in Model -->
             <div class="formcontainer">
-                <form  name="taskForm"
-                    class="form-horizontal">
-                    <input type="hidden"  />
+                <form 
+                    [formGroup]="taskForm"
+                    (ngSubmit)="saveTask"
+                    class="form-horizontal"
+                    >
+                    
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="col-md-2 control-lable" for="description">Description</label>
                             <div class="col-md-7">
                                 <input type="text" 
-                                    id="description" class=" form-control input-sm"
-                                    placeholder="Enter a task description" required />
+                                    id="description" 
+                                    class=" form-control input-sm"
+                                    placeholder="Enter a task description" required
+                                    formControlName="description"
+                                    />
                             </div>
                         </div>
                     </div>
@@ -31,7 +37,9 @@ aria-controls="collapseCreateTask">
                             <div class="col-md-7">
                                 <input type="date"  id="date"
                                     class="form-control input-sm"
-                                    placeholder="Enter a due date. " />
+                                    placeholder="Enter a due date. "
+                                    formControlName="dueDate"
+                                    />
                             </div>
                         </div>
                     </div>
@@ -39,7 +47,7 @@ aria-controls="collapseCreateTask">
                     <div class="row">
                         <div class="form-actions floatRight">
                             <input type="submit" id="submitTask" value="Add"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm" (click)="saveTask()">
                             <button type="button" 
                                 class="btn btn-warning btn-sm"
                                >Reset</button>

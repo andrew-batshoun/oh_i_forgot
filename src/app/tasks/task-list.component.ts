@@ -25,8 +25,14 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(){
-    this.sub.unsubscribe();
+  deleteTask(id: number): void {
+    if(confirm('Are you sure you want to delete?')){
+      this.taskService.deleteTask(id).subscribe({
+        next: () => console.log(`Task ${id} has been deleted`),
+        error: err => this.errorMessage = err
+      });
+    }
+    
   }
  
 }
