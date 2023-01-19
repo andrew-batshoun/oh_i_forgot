@@ -26,11 +26,14 @@ errorMessage: string = "";
 
   saveTask(): void{
     this.taskService.saveTask(this.taskForm.value).subscribe({
-      next: () => console.log('Saved task'),
+      next: () => this.reloadPage(),
       error: err => this.errorMessage = err
       
     });
 
   }
+  reloadPage() {
+    window.location.reload();
+ }
 
 }

@@ -15,24 +15,38 @@
               
             </tr>
           </thead>
-          <tbody *ngIf="tasks.length">
-            <tr *ngFor="let task of tasks">
+          <tbody >
+            <tr *ngFor="let task of tasks; let i = index">
               
               <td>{{task.id}}</td>
-              <td>{{task.description}}</td>
-              <td >{{task.dueDate }}</td>
-              <td><input type="checkbox" /></td>
-              <td>
-                <div  >
-                    <button  type="button" 
+              <td *ngIf="!task.isEdit ">{{task.description}}</td>
+              <input *ngIf="task.isEdit" id="descriptionEdit" type="text" [(ngModel)] ="task.description" >
+              <td *ngIf="!task.isEdit">{{task.dueDate }}</td>
+              <input *ngIf="task.isEdit" id="dateEdit" type="date" [(ngModel)]="task.dueDate">
+              <td><input type="checkbox"  (change)="showRemove($event, task)" /></td>
+              <td *ngIf="!task.isEdit">
+                <div>
+                    <button *ngIf="task.checked"  type="button" 
                         class="btn btn-danger custom-width"
                         (click)="deleteTask(task.id)">Remove</button>
                 </div>
-              </td>
-              <td>
-                <button class="btn btn-outline-primary btn-sm">
+                </td>
+                <td *ngIf="!task.isEdit">
+                <div>
+                <button class="btn btn-outline-primary custom-width"
+                (click)="editing(task)">
                   Edit
                 </button>
+              </div>
+              </td>
+              <td>
+                <div *ngIf="task.isEdit">
+									<button type="button" 
+										class="btn btn-danger custom-width" id="submitEdit" (click)="editSubmit(task)" >Save</button>
+
+									<button type="button" 
+										class="btn btn-primary custom-width" id="cancelEdit" (click)="task.isEdit = false">Cancel</button>
+								</div>
               </td>
             </tr>
           </tbody>

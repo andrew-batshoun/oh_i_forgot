@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskListComponent } from './task-list.component';
 import { AddTaskComponent } from './add/add-task.component';
-import {  ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 
@@ -14,9 +14,10 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: 'tasks', component: TaskListComponent}
+      {path: '', component: TaskListComponent}
     ])
   ]
 })

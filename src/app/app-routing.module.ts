@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [];
+import { WelcomeComponent } from './home/welcome/welcome.component';
+import { AuthGuard } from './users/auth.guard';
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot([
+      {path: 'welcome', component: WelcomeComponent},
+      {path: 'tasks',
+       canActivate: [AuthGuard],
+       loadChildren: () =>
+        import('./tasks/task.module').then(m => m.TaskModule)},
+        {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+        {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
+    ])],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

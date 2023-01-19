@@ -1,49 +1,71 @@
-<div class =" reg-form"  >
-		<h4>Create an Account</h4>
-		
-		<br>
-		
-		<!-- Start of register form -->
-		<form ng-submit="ctrl.submit()" name="userForm"
-							class="form-horizontal">
-							<input type="hidden" ng-model="ctrl.user.id" />
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label class="col-md-2 control-lable" for="username">Username</label>
-									<div class="col-md-7">
-										<input type="text" 
-											id="username" class=" form-control input-sm"
-											placeholder="Enter a Username" required />
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label class="col-md-2 control-lable" for="email">Email
-										</label>
-									<div class="col-md-7">
-										<input type="email"  id="email"
-											class="form-control input-sm"
-											placeholder="Enter an Email " required/>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label class="col-md-2 control-lable" for="password">Password
-										</label>
-									<div class="col-md-7">
-										<input type="password" id="password"
-											class="form-control input-sm"
-											placeholder="Enter Password " required />
-									</div>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="form-actions floatRight">
-									<input type="submit"  id="submitUser" value="Sign up" class="btn btn-primary btn-sm">	
-								</div>
-							</div>
-						</form>
-		</div>
+<div class="reg-form">
+  <h4>Create an Account</h4>
+
+  <br />
+
+  <!-- Start of register form -->
+  <form
+    [formGroup]="userForm"
+    (ngSubmit)="(registerUser)"
+    class="form-horizontal"
+  >
+    <input type="hidden" ng-model="ctrl.user.id" />
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-2 control-lable" for="username">Username</label>
+        <div class="col-md-7">
+          <input
+            type="text"
+            id="username"
+            class="form-control input-sm"
+            placeholder="Enter a Username"
+            required
+            formControlName="username"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-2 control-lable" for="email">Email </label>
+        <div class="col-md-7">
+          <input
+            type="email"
+            id="email"
+            class="form-control input-sm"
+            placeholder="Enter an Email "
+            required
+            formControlName="email"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-2 control-lable" for="password">Password </label>
+        <div class="col-md-7">
+          <input
+            type="password"
+            id="password"
+            class="form-control input-sm"
+            placeholder="Enter Password "
+            required
+            formControlName="password"
+          />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="form-actions floatRight">
+        <input
+          type="submit"
+          id="submitUser"
+          value="Sign up"
+          class="btn btn-primary btn-sm"
+          (click)="registerUser()"
+        />
+      </div>
+    </div>
+  </form>
+</div>

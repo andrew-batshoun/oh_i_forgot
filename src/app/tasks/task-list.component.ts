@@ -10,7 +10,10 @@ import { TaskService } from './task.service';
 })
 export class TaskListComponent implements OnInit {
   errorMessage: string = "";
-  sub!: Subscription;
+  sub: Subscription;
+   
+   
+  
   
   constructor(private taskService: TaskService) { }
   
@@ -25,15 +28,45 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+  showRemove(event: any, task:Task): void{
+    this.tasks.forEach(element => {
+      element.checked = false;
+      
+    });
+    if(event.currentTarget.checked){
+      task.checked = true;
+    }
+  }
+
   deleteTask(id: number): void {
     if(confirm('Are you sure you want to delete?')){
       this.taskService.deleteTask(id).subscribe({
-        next: () => console.log(`Task ${id} has been deleted`),
+        next: () => this.reloadPage(),
         error: err => this.errorMessage = err
       });
     }
     
   }
+
+  editing(task: any): void{
+  this.tasks.forEach(element => {
+    element.isEdit = false; 
+  });
+  task.isEdit = true; 
+  }
+
+  editSubmit(task:Task):void{
+    this.taskService.updateTask(task).subscribe({
+      next: () => this.reloadPage(),
+      error: err => this.errorMessage = err
+      
+    });
+  }
+
+  reloadPage() {
+    window.location.reload();
+ }
+  
  
 }
  
