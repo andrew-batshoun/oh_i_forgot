@@ -3,10 +3,13 @@
 export interface Task{
     id: number | null; 
     description: string;
-    date: Date;
+    dueDate: Date;
+    isEdit: boolean ;
+    checked: boolean; 
 }
 
-export interface TaskResolved{
-    task: Task | null; 
-    error?: string; 
+export interface NewTask{
+    id: number | null; 
+    description: string;
+    dueDate: Date;
 }
