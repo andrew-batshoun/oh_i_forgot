@@ -30,11 +30,13 @@
                 <input
                   type="text"
                   id="description"
-                  class="form-control input-sm"
+                  class="form-control "
                   placeholder="Enter a task description"
-                  required
                   formControlName="description"
                 />
+                
+          
+                
               </div>
             </div>
           </div>
@@ -60,15 +62,28 @@
                 id="submitTask"
                 value="Add"
                 class="btn btn-primary btn-sm"
+                [title]="
+                  taskForm.valid
+                    ? 'Save entered data'
+                    : 'Disable until form complete'
+                "
+                [disabled]="!taskForm.get('description').valid"
                 (click)="saveTask()"
               />
-              <button type="button" class="btn btn-warning btn-sm">
+              <button type="button" class="btn btn-warning btn-sm" (click)="reset()">
                 Reset
               </button>
             </div>
           </div>
+          
         </form>
+        
       </div>
     </div>
+    <span class="alert alert-danger text-center"
+          id="addAlert"
+                    *ngIf="(taskForm.get('description').touched || taskForm.get('description').dirty) && !taskForm.get('description').valid">
+                    Please enter a Description
+                  </span>
   </div>
 </div>

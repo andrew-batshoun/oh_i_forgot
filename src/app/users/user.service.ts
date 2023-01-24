@@ -9,11 +9,10 @@ import { User } from "./user";
 
 export class UserService{
     private userUrl = 'http://localhost:8080/api/auth/';
-    currentUser: User; 
     redirectUrl = '';
 
     get isLoggedIn():boolean{
-        return !!this.currentUser;
+        return !!localStorage.getItem('user');
     }
 
     constructor(private http: HttpClient){}
@@ -33,7 +32,7 @@ export class UserService{
             username: user.username,
             password: user.password
         }).pipe(
-            tap(data => this.currentUser = data),
+            tap(data => localStorage.setItem('user', JSON.stringify(data))),
             catchError(this.handleError)
         );
     }
@@ -50,7 +49,7 @@ export class UserService{
     }
 
     logout(): void{
-        this.currentUser = undefined; 
+        localStorage.removeItem('user'); 
     }
 
 

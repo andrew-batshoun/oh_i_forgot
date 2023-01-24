@@ -10,6 +10,8 @@ import { UserService } from './user.service';
 })
 export class LoginUsersComponent implements OnInit {
 errorMessage: string = "";
+ifError: boolean = false; 
+
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
   loginForm: FormGroup;
 
@@ -23,12 +25,20 @@ errorMessage: string = "";
   loginUser(): void{
     this.userService.loginUser(this.loginForm.value).subscribe({
       next: () => this.redirect(),
-      error: err => this.errorMessage = err
+      error: err =>{
+        this.ifError = true;
+        this.errorMessage = err;
+        
+      },
     });
   }
 
   redirect(){
     this.router.navigate(['tasks']);
+  }
+
+  reload(){
+    window.location.reload();
   }
 
 }

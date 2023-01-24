@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
-import { Task } from '../task';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { NewTask } from '../task';
 
 @Component({
   selector: 'app-add-task',
@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddTaskComponent implements OnInit {
 errorMessage: string = "";
+newTask: NewTask;
 
   constructor(private  formBuilder: FormBuilder, private taskService: TaskService) { }
   taskForm: FormGroup;
@@ -25,7 +26,19 @@ errorMessage: string = "";
   
 
   saveTask(): void{
-    this.taskService.saveTask(this.taskForm.value).subscribe({
+    console.log(this.taskForm.get('dueDate').value)
+    let dateEdit = new Date(this.taskForm.get('dueDate').value);
+let year:number = dateEdit.getFullYear();
+let month: number = +(dateEdit.getMonth()).toString().padStart(2, "0");;
+let day: number = + (dateEdit.getDate() + 1).toString().padStart(2, "0");
+   
+    this.newTask = {
+    id: 0,
+    description: this.taskForm.get('description').value,
+    dueDate: new Date(year, month, day),
+  
+   };
+    this.taskService.saveTask(this.newTask).subscribe({
       next: () => this.reloadPage(),
       error: err => this.errorMessage = err
       
@@ -34,6 +47,10 @@ errorMessage: string = "";
   }
   reloadPage() {
     window.location.reload();
+ }
+
+ reset(){
+  this.taskForm.reset();
  }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Task } from "./task";
+import { NewTask, Task } from "./task";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, catchError, tap, map, throwError} from 'rxjs';
 
@@ -20,7 +20,7 @@ export class TaskService{
        );
     }
 
-    saveTask(task: Task): Observable<Task>{
+    saveTask(task: NewTask): Observable<Task>{
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
         return this.http.post<Task>(this.taskUrl, task, {headers})
         .pipe(

@@ -4,6 +4,7 @@ import { TaskListComponent } from './task-list.component';
 import { AddTaskComponent } from './add/add-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from '../users/auth.guard';
 
 
 
@@ -17,7 +18,11 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: '', component: TaskListComponent}
+      {
+        path: 'tasks',
+        component: TaskListComponent,
+        canActivate: [AuthGuard],
+       }
     ])
   ]
 })

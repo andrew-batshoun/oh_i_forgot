@@ -22,6 +22,7 @@
             required
             formControlName="username"
           />
+          <span class="text-danger" id="descriptionError" *ngIf="(userForm.get('username').touched || userForm.get('username').dirty) && !userForm.get('username').valid">Please enter username</span>
         </div>
       </div>
     </div>
@@ -37,6 +38,7 @@
             required
             formControlName="email"
           />
+          <span class="text-danger" *ngIf="(userForm.get('email').touched || userForm.get('email').dirty) && !userForm.get('email').valid">Please enter Email</span>
         </div>
       </div>
     </div>
@@ -52,6 +54,7 @@
             required
             formControlName="password"
           />
+          <span class="text-danger" *ngIf="(userForm.get('password').touched || userForm.get('password').dirty) && !userForm.get('password').valid">Please enter a password</span>
         </div>
       </div>
     </div>
@@ -63,6 +66,7 @@
           id="submitUser"
           value="Sign up"
           class="btn btn-primary btn-sm"
+          [disabled]="!userForm.valid"
           (click)="registerUser()"
         />
       </div>
