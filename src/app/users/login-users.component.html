@@ -1,0 +1,45 @@
+<div class="card text-center">
+  <!-- Login Form -->
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="(loginUser)"
+    name="loginForm"
+    class="form-signin"
+  >
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+    <label for="username" class="sr-only">Username</label>
+    <input
+      id="username"
+      name="username"
+      ng-model="username"
+      type="text"
+      class="form-control"
+      placeholder="Username"
+      required
+      formControlName="username"
+      autofocus
+    />
+    <label for="password" class="sr-only">Password</label>
+    <input
+      id="password"
+      name="password"
+      ng-model="password"
+      type="password"
+      class="form-control"
+      placeholder="Password"
+      required
+      formControlName="password"
+    />
+    <button
+      class="btn btn-lg btn-info btn-block"
+      id="submitLogin"
+      type="submit"
+      (click)="loginUser()"
+    >
+      Sign in
+    </button>
+    <br />
+    <p class="alert alert-danger text-center" id="loginError" *ngIf="ifError">Email or Password is incorrect</p>
+  </form>
+</div>

@@ -1,0 +1,90 @@
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks; index as i">
+            <td >{{ task.id }}</td>
+            <td *ngIf="!task.isEdit" attr.id="description-{{i}}">{{ task.description }}</td>
+            <input
+              *ngIf="task.isEdit"
+              attr.id="descriptionEdit-{{i}}"
+              name="descriptionEdit"
+              type="text"
+              [(ngModel)]="task.description"
+              
+            />
+           <span class="text-danger" attr.id="descriptionAlert-{{i}}" *ngIf="task.description === ' ' ">Description cannot be blank</span>
+            <td *ngIf="!task.isEdit" attr.id="date-{{i}}">{{ task.dueDate | date: 'shortDate'}}</td>
+            <input
+              *ngIf="task.isEdit"
+              attr.id="dateEdit-{{i}}"
+              type="date"
+              [(ngModel)]="task.dueDate"
+            />
+            <td>
+              <input type="checkbox" attr.id="checkBox-{{i}}" (change)="showRemove($event, task)" />
+            </td>
+            <td *ngIf="!task.isEdit">
+              <div>
+                <button
+                  *ngIf="task.checked"
+                  type="button"
+                  attr.id="removeTask-{{i}}"
+                  class="btn btn-danger custom-width"
+                  (click)="deleteTask(task.id)"
+                >
+                  Remove
+                </button>
+              </div>
+            </td>
+            <td *ngIf="!task.isEdit">
+              <div>
+                <button
+                  class="btn btn-outline-primary custom-width"
+                  attr.id="editTask-{{i}}"
+                  (click)="editing(task)"
+                >
+                  Edit
+                </button>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="task.isEdit">
+                <button
+                  type="button"
+                  class="btn btn-danger custom-width"
+                  attr.id="submitEdit-{{i}}"
+                  [disabled]="task.description === ''"
+                  (click)="editSubmit(task)"
+                >
+                  Save
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-primary custom-width"
+                  attr.id="cancelEdit-{{i}}"
+                  (click)="task.isEdit = false"
+                >
+                  Cancel
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-add-task></app-add-task>
