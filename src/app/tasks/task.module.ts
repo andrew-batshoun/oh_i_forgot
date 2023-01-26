@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TaskListComponent } from './task-list.component';
 import { AddTaskComponent } from './add/add-task.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../users/auth.guard';
+import { SharedModule } from '../shared/shared/shared.module';
 
 
 
@@ -14,16 +13,14 @@ import { AuthGuard } from '../users/auth.guard';
     AddTaskComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+   
     RouterModule.forChild([
       {
-        path: 'tasks',
+        path: '',
         component: TaskListComponent,
-        canActivate: [AuthGuard],
        }
-    ])
+    ]),
+    SharedModule
   ]
 })
 export class TaskModule { }
