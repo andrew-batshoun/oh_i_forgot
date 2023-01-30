@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { HttpHeaders } from '@angular/common/http';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from './task';
@@ -19,12 +19,13 @@ export class TaskListComponent implements OnInit {
    
   
   
-  constructor(private taskService: TaskService, @Inject(LOCALE_ID) public locale: string) { }
+  constructor(private taskService: TaskService) { }
   
   tasks: Task[]=[];
   
 
   ngOnInit(): void {
+    
    this.sub = this.taskService.getTasks().subscribe({
       next: tasks => this.tasks = tasks, 
       error: err => this.errorMessage = err
@@ -43,7 +44,15 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTask(id: number): void {
-    if(confirm('Are you sure you want to delete?')){
+    let string ="";
+    if(localStorage.getItem('lang') === 'de'){
+      string = "Sind Sie sicher, dass Sie das löschen möchten?";
+    }else if(localStorage.getItem('lang') === 'es'){
+      string = "¿Estás seguro de que quieres eliminar?";
+    }else{
+      string = "Are you sure you want to delete?"
+    }
+    if(confirm(string)){
       this.taskService.deleteTask(id).subscribe({
         next: () => this.reloadPage(),
         error: err => this.errorMessage = err
@@ -74,7 +83,7 @@ let day: number = + (dateEdit.getDate() + 1).toString().padStart(2, "0");
     isEdit: task.isEdit,
     checked: task.checked
    };
-  //  console.log(`${year} - ${month} - ${day}` );
+  
 
       this.taskService.updateTask(this.newTask).subscribe({
         next: () => this.reloadPage(),

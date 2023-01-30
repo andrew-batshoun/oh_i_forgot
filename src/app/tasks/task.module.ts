@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { TaskListComponent } from './task-list.component';
 import { AddTaskComponent } from './add/add-task.component';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from '../users/auth.guard';
 import { SharedModule } from '../shared/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core/public_api';
 
 
 
@@ -20,7 +20,8 @@ import { SharedModule } from '../shared/shared/shared.module';
         component: TaskListComponent,
        }
     ]),
-    SharedModule
+    SharedModule,
+     
   ]
 })
 export class TaskModule { }

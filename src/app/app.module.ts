@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 
 import { UserModule } from './users/user.module';
 import { AppRoutingModule } from './app-routing.module';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageInterceptor } from './interceptors/language.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from './shared/shared/shared.module';
 
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,9 +24,25 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     UserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    SharedModule
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LanguageInterceptor,
+      multi: true 
+    },
+    HttpClient
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

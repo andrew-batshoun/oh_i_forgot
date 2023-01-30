@@ -6,28 +6,28 @@
     name="loginForm"
     class="form-signin"
   >
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">{{"Please sign in" | translate}}</h1>
 
-    <label for="username" class="sr-only">Username</label>
+    <label for="username" class="sr-only">{{"Username" | translate}}</label>
     <input
       id="username"
       name="username"
       ng-model="username"
       type="text"
       class="form-control"
-      placeholder="Username"
+      placeholder="{{'Username' | translate}}"
       required
       formControlName="username"
       autofocus
     />
-    <label for="password" class="sr-only">Password</label>
+    <label for="password" class="sr-only">{{"Password" | translate}}</label>
     <input
       id="password"
       name="password"
       ng-model="password"
       type="password"
       class="form-control"
-      placeholder="Password"
+      placeholder="{{'Password' | translate}}"
       required
       formControlName="password"
     />
@@ -37,9 +37,9 @@
       type="submit"
       (click)="loginUser()"
     >
-      Sign in
+     {{"Sign in" | translate}}
     </button>
     <br />
-    <p class="alert alert-danger text-center" id="loginError" *ngIf="ifError">Email or Password is incorrect</p>
+    <p class="alert alert-danger text-center" id="loginError" *ngIf="ifError">{{"Email or Password is incorrect" | translate}}</p>
   </form>
 </div>

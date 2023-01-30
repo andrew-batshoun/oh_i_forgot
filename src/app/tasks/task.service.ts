@@ -14,6 +14,7 @@ export class TaskService{
     constructor(private http: HttpClient){}
 
     getTasks(): Observable<Task[]>{
+   
        return this.http.get<Task[]>(this.taskUrl).pipe(
         tap(data => console.log('All', JSON.stringify(data))),
         catchError(this.handleError)

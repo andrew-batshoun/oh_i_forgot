@@ -2,7 +2,7 @@
 <input
   class="btn btn-primary"
   id="addTask"
-  value="New Task"
+  value="{{'New Task' | translate}}"
   type="button"
   data-bs-toggle="collapse"
   data-bs-target="#collapseCreateTask"
@@ -24,14 +24,14 @@
           <div class="row">
             <div class="form-group col-md-12">
               <label class="col-md-2 control-lable" for="description"
-                >Description</label
+                >{{"Description" | translate}}</label
               >
               <div class="col-md-7">
                 <input
                   type="text"
                   id="description"
                   class="form-control "
-                  placeholder="Enter a task description"
+                  placeholder="{{'Enter a Description' | translate}}"
                   formControlName="description"
                 />
                 
@@ -42,13 +42,13 @@
           </div>
           <div class="row">
             <div class="form-group col-md-12">
-              <label class="col-md-2 control-lable" for="date">Due Date</label>
+              <label class="col-md-2 control-lable" for="date">{{"Due Date" | translate}}</label>
               <div class="col-md-7">
                 <input
                   type="date"
                   id="date"
                   class="form-control input-sm"
-                  placeholder="Enter a due date. "
+                  placeholder="{{'Enter a due date' | translate}}"
                   formControlName="dueDate"
                 />
               </div>
@@ -60,7 +60,7 @@
               <input
                 type="submit"
                 id="submitTask"
-                value="Add"
+                value="{{'Add' | translate}}"
                 class="btn btn-primary btn-sm"
                 [title]="
                   taskForm.valid
@@ -71,7 +71,7 @@
                 (click)="saveTask()"
               />
               <button type="button" class="btn btn-warning btn-sm" (click)="reset()">
-                Reset
+                {{"Reset" | translate}}
               </button>
             </div>
           </div>
@@ -83,7 +83,7 @@
     <span class="alert alert-danger text-center"
           id="addAlert"
                     *ngIf="(taskForm.get('description').touched || taskForm.get('description').dirty) && !taskForm.get('description').valid">
-                    Please enter a Description
+                    {{"Enter a Description" | translate}}
                   </span>
   </div>
 </div>
