@@ -19,7 +19,7 @@ export class UserService{
 
     registerUser(user: User): Observable<User>{
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-        return this.http.post<User>(this.userUrl + "signup", user, {headers})
+        return this.http.post<User>(this.userUrl + "signup", user, {headers, withCredentials: true})
         .pipe(
             tap(data => console.log('Created user: ' + JSON.stringify(data))),
             catchError(this.handleError)
@@ -31,7 +31,7 @@ export class UserService{
         return this.http.post<User>(this.userUrl + "login", {
             username: user.username,
             password: user.password
-        }).pipe(
+        }, {withCredentials: true}).pipe(
             tap(data => localStorage.setItem('user', JSON.stringify(data))),
             catchError(this.handleError)
         );

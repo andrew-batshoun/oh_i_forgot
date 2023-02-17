@@ -4,7 +4,7 @@
       <table class="table mb-0">
         <thead>
           <tr>
-            <th>{{"Id" | translate}}</th>
+            <th>#</th>
             <th>{{"Description" | translate}}</th>
             <th>{{"Due Date" | translate}}</th>
             <th></th>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let task of tasks; index as i">
-            <td >{{ task.id }}</td>
+            <td >{{ i + 1 }}</td>
             <td *ngIf="!task.isEdit" attr.id="description-{{i}}">{{ task.description }}</td>
             <input
               *ngIf="task.isEdit"

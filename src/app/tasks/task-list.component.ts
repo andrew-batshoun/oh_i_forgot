@@ -1,5 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from './task';
 import { TaskService } from './task.service';

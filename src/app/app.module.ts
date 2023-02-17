@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageInterceptor } from './interceptors/language.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from './shared/shared/shared.module';
+import { XhrInterceptor } from './interceptors/xhr.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -40,6 +41,11 @@ export function HttpLoaderFactory(http: HttpClient){
       provide: HTTP_INTERCEPTORS,
       useClass: LanguageInterceptor,
       multi: true 
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XhrInterceptor, 
+      multi: true
     },
     HttpClient
   ],

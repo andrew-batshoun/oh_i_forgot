@@ -26,7 +26,7 @@
     "Enter a Username": "Ingrese un nombre de usuario",
     "Enter an Email": "Ingrese un correo electrónico",
     "Enter Password": "Ingresar contraseña",
-    "Email or Password is incorrect": "El correo electrónico o la contraseña son incorrectos",
+    "Username or Password is incorrect": "Nombre de usuario o la contraseña son incorrectos",
     "Please enter username": "Ingrese el nombre de usuario",
     "Please enter email": "Por favor, introduzca el correo electrónico",
     "Please enter password":"Por favor ingrese la contraseña",
