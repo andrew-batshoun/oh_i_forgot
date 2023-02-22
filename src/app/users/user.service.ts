@@ -12,7 +12,7 @@ export class UserService{
     redirectUrl = '';
 
     get isLoggedIn():boolean{
-        return !!localStorage.getItem('user');
+        return !!sessionStorage.getItem('user');
     }
 
     constructor(private http: HttpClient){}
@@ -32,7 +32,7 @@ export class UserService{
             username: user.username,
             password: user.password
         }, {withCredentials: true}).pipe(
-            tap(data => localStorage.setItem('user', JSON.stringify(data))),
+            tap(data => sessionStorage.setItem('user', JSON.stringify(data.username))),
             catchError(this.handleError)
         );
     }
@@ -49,7 +49,7 @@ export class UserService{
     }
 
     logout(): void{
-        localStorage.removeItem('user'); 
+        sessionStorage.removeItem('user'); 
     }
 
 

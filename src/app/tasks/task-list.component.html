@@ -23,7 +23,7 @@
               [(ngModel)]="task.description"
               
             />
-           <span class="text-danger" attr.id="descriptionAlert-{{i}}" *ngIf="task.description === ' ' ">{{"Description cannot be blank" | translate}}</span>
+           <span class="text-danger" attr.id="descriptionAlert-{{i}}" *ngIf="task.description === '' ">{{"Description cannot be blank" | translate}}</span>
             <td *ngIf="!task.isEdit" attr.id="date-{{i}}">{{ task.dueDate | date: 'shortDate'}}</td>
             <input
               *ngIf="task.isEdit"
