@@ -4,16 +4,16 @@
       <table class="table mb-0">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Description</th>
-            <th>Due Date</th>
+            <th>#</th>
+            <th>{{"Description" | translate}}</th>
+            <th>{{"Due Date" | translate}}</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let task of tasks; index as i">
-            <td >{{ task.id }}</td>
+            <td >{{ i + 1 }}</td>
             <td *ngIf="!task.isEdit" attr.id="description-{{i}}">{{ task.description }}</td>
             <input
               *ngIf="task.isEdit"
@@ -23,7 +23,7 @@
               [(ngModel)]="task.description"
               
             />
-           <span class="text-danger" attr.id="descriptionAlert-{{i}}" *ngIf="task.description === ' ' ">Description cannot be blank</span>
+           <span class="text-danger" attr.id="descriptionAlert-{{i}}" *ngIf="task.description === '' ">{{"Description cannot be blank" | translate}}</span>
             <td *ngIf="!task.isEdit" attr.id="date-{{i}}">{{ task.dueDate | date: 'shortDate'}}</td>
             <input
               *ngIf="task.isEdit"
@@ -43,7 +43,7 @@
                   class="btn btn-danger custom-width"
                   (click)="deleteTask(task.id)"
                 >
-                  Remove
+                  {{"Remove" | translate}}
                 </button>
               </div>
             </td>
@@ -54,7 +54,7 @@
                   attr.id="editTask-{{i}}"
                   (click)="editing(task)"
                 >
-                  Edit
+                  {{"Edit" | translate}}
                 </button>
               </div>
             </td>
@@ -67,7 +67,7 @@
                   [disabled]="task.description === ''"
                   (click)="editSubmit(task)"
                 >
-                  Save
+                  {{"Save" | translate}}
                 </button>
 
                 <button
@@ -76,7 +76,7 @@
                   attr.id="cancelEdit-{{i}}"
                   (click)="task.isEdit = false"
                 >
-                  Cancel
+                  {{"Cancel" | translate}}
                 </button>
               </div>
             </td>

@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 
-import { RouterModule } from '@angular/router';
-import { TaskModule } from './tasks/task.module';
 import { UserModule } from './users/user.module';
 import { AppRoutingModule } from './app-routing.module';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageInterceptor } from './interceptors/language.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from './shared/shared/shared.module';
+import { XhrInterceptor } from './interceptors/xhr.interceptor';
 
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,11 +24,31 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    TaskModule,
     UserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    SharedModule
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LanguageInterceptor,
+      multi: true 
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XhrInterceptor, 
+      multi: true
+    },
+    HttpClient
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
