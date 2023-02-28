@@ -1,0 +1,32 @@
+<!-- Activates Model for adding a task, will not show when editing task -->
+<input
+  class="btn btn-primary"
+  id="addTask"
+  value="{{ 'New Task' | translate }}"
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#modalCreateTask"
+  aria-controls="collapseCreateTask"
+/>
+<div class="inbox">
+  <div class="title">
+    <h5>Tasks</h5>
+  </div>
+  <div class="item" *ngFor="let task of tasks; index as i">
+    <input type="checkbox" />
+    <p>
+      {{ task.description }} <br />
+      <span class="due">{{ "Due Date" | translate }}:</span>
+      {{ task.dueDate | date : "shortDate" }}
+    </p>
+
+    <button
+      class="btn btn-outline-info btn-sm edit"
+      attr.id="editTask-{{ i }}"
+      (click)="editing(task)"
+    >
+    <fa-icon [icon]="faPen" ></fa-icon>
+    </button>
+  </div>
+</div>
+<app-add-task></app-add-task>

@@ -1,89 +1,104 @@
-<!-- Activates Model for adding a task, will not show when editing task -->
-<input
-  class="btn btn-primary"
-  id="addTask"
-  value="{{'New Task' | translate}}"
-  type="button"
-  data-bs-toggle="collapse"
-  data-bs-target="#collapseCreateTask"
-  aria-expanded="false"
-  aria-controls="collapseCreateTask"
-/>
-
 <!--Model for adding task  -->
-<div class="collapse" id="collapseCreateTask">
-  <div class="card card-body">
-    <div class="panel panel-default">
-      <!--Form for adding task in Model -->
-      <div class="formcontainer">
-        <form
-          [formGroup]="taskForm"
-          (ngSubmit)="(saveTask)"
-          class="form-horizontal"
+<div
+  class="modal fade"
+  id="modalCreateTask"
+  tabindex="-1"
+  aria-labelledby="addTaskLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addTaskLabel">
+          {{ "New Task" | translate }}
+        </h1>
+      </div>
+      <div class="model-body">
+        <!--Form for adding task in Model -->
+        <div class="formcontainer">
+          <form
+            [formGroup]="taskForm"
+            (ngSubmit)="(saveTask)"
+            class="form-horizontal"
+          >
+            
+              <div class="mb-3">
+                <label class="col-form-label" for="description">{{
+                  "Description" | translate
+                }}</label>
+                
+                  <input
+                    type="text"
+                    id="description"
+                    class="form-control"
+                    placeholder="{{ 'Enter a Description' | translate }}"
+                    formControlName="description"
+                  />
+                </div>
+                <span
+          class="alert alert-danger text-center"
+          id="addAlert"
+          *ngIf="
+            (taskForm.get('description').touched ||
+              taskForm.get('description').dirty) &&
+            !taskForm.get('description').valid
+          "
         >
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label class="col-md-2 control-lable" for="description"
-                >{{"Description" | translate}}</label
-              >
-              <div class="col-md-7">
-                <input
-                  type="text"
-                  id="description"
-                  class="form-control "
-                  placeholder="{{'Enter a Description' | translate}}"
-                  formControlName="description"
-                />
+          {{ "Enter a Description" | translate }}
+        </span>
+              
+            
+            
+              <div class="mb-3">
+                <label class="col-form-label" for="date">{{
+                  "Due Date" | translate
+                }}</label>
                 
-          
+                  <input
+                    type="date"
+                    id="date"
+                    class="form-control input-sm"
+                    placeholder="{{ 'Enter a due date' | translate }}"
+                    formControlName="dueDate"
+                  />
+                </div>
+              
+            
+            <br />
+            <div class="row">
+              <div class="form-actions floatRight">
                 
+                <button
+                  type="button"
+                  class="btn btn-warning btn-sm"
+                  (click)="reset()"
+                >
+                  {{ "Reset" | translate }}
+                </button>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label class="col-md-2 control-lable" for="date">{{"Due Date" | translate}}</label>
-              <div class="col-md-7">
-                <input
-                  type="date"
-                  id="date"
-                  class="form-control input-sm"
-                  placeholder="{{'Enter a due date' | translate}}"
-                  formControlName="dueDate"
-                />
-              </div>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="form-actions floatRight">
-              <input
-                type="submit"
-                id="submitTask"
-                value="{{'Add' | translate}}"
-                class="btn btn-primary btn-sm"
-                [title]="
-                  taskForm.valid
-                    ? 'Save entered data'
-                    : 'Disable until form complete'
-                "
-                [disabled]="!taskForm.get('description').valid"
-                (click)="saveTask()"
-              />
-              <button type="button" class="btn btn-warning btn-sm" (click)="reset()">
-                {{"Reset" | translate}}
-              </button>
-            </div>
-          </div>
-          
-        </form>
+          </form>
+        </div>
         
       </div>
+      <div class="model-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Close
+        </button>
+        <input
+                  type="submit"
+                  id="submitTask"
+                  value="{{ 'Add' | translate }}"
+                  class="btn btn-primary "
+                  [title]="
+                    taskForm.valid
+                      ? 'Save entered data'
+                      : 'Disable until form complete'
+                  "
+                  [disabled]="!taskForm.get('description').valid"
+                  (click)="saveTask()"
+                />
+      </div>
     </div>
-    <span class="alert alert-danger text-center"
-          id="addAlert"
-                    *ngIf="(taskForm.get('description').touched || taskForm.get('description').dirty) && !taskForm.get('description').valid">
-                    {{"Enter a Description" | translate}}
-                  </span>
   </div>
 </div>
