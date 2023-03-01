@@ -30,6 +30,7 @@
   input[type="checkbox"] {
     margin: 20px;
   }
+  
 
   p {
     margin: 0;
@@ -49,5 +50,16 @@
   .edit{
     margin: 1px 8px;
     color: rgb(111, 165, 84);
-   
   }
+
+  .editSave, .cancel{
+    margin-top: 8px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    float: right;
+  }
+
+  .formcontainer{
+    width: 80%;
+    margin: 0 auto;
+}

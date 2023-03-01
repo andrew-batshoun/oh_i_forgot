@@ -14,19 +14,53 @@
   </div>
   <div class="item" *ngFor="let task of tasks; index as i">
     <input type="checkbox" />
-    <p>
+    <p *ngIf="!task.isEdit">
       {{ task.description }} <br />
       <span class="due">{{ "Due Date" | translate }}:</span>
       {{ task.dueDate | date : "shortDate" }}
     </p>
 
     <button
+      *ngIf="!task.isEdit"
       class="btn btn-outline-info btn-sm edit"
       attr.id="editTask-{{ i }}"
       (click)="editing(task)"
     >
-    <fa-icon [icon]="faPen" ></fa-icon>
+      <fa-icon [icon]="faPen"></fa-icon>
     </button>
+
+    <div *ngIf="task.isEdit" class="formcontainer">
+      <form [formGroup]="editForm" class="form-horizontal" (ngSubmit)="(editSubmit(task))">
+        <input type="text" class="form-control" formControlName="description" />
+
+        <input
+          type="date"
+          id="date"
+          class="form-control input-sm"
+          formControlName="dueDate"
+        />
+
+        
+          <button
+            type="button"
+            class="btn btn-outline-primary btn-sm editSave"
+            attr.id="submitEdit-{{ i }}"
+            (click)="editSubmit(task)"
+          >
+          <fa-icon [icon]="faFolder"></fa-icon>
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-sm cancel"
+            attr.id="cancelEdit-{{ i }}"
+            (click)="task.isEdit = false"
+          >
+          <fa-icon [icon]="faBan"></fa-icon>
+          </button>
+        
+      </form>
+    </div>
   </div>
 </div>
 <app-add-task></app-add-task>
