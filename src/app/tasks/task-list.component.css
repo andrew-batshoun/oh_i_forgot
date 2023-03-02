@@ -63,3 +63,17 @@
     width: 80%;
     margin: 0 auto;
 }
+
+.model-body{
+  margin: 10px 2em;
+}
+
+.model-footer{
+ text-align: right;
+ padding: 5px;
+ 
+}
+
+button{
+  margin-right: 5px;
+}

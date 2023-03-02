@@ -8,12 +8,20 @@
   data-bs-target="#modalCreateTask"
   aria-controls="collapseCreateTask"
 />
+
 <div class="inbox">
+  <button 
+    class="btn btn-outline-danger btn-sm delete"
+    (click)="deleteTask()"
+   
+    >
+    <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
   <div class="title">
     <h5>Tasks</h5>
   </div>
   <div class="item" *ngFor="let task of tasks; index as i">
-    <input type="checkbox" />
+    <input type="checkbox" [(ngModel)]="task.checked" />
     <p *ngIf="!task.isEdit">
       {{ task.description }} <br />
       <span class="due">{{ "Due Date" | translate }}:</span>
@@ -28,6 +36,8 @@
     >
       <fa-icon [icon]="faPen"></fa-icon>
     </button>
+
+    
 
     <div *ngIf="task.isEdit" class="formcontainer">
       <form [formGroup]="editForm" class="form-horizontal" (ngSubmit)="(editSubmit(task))">
@@ -60,7 +70,15 @@
           </button>
         
       </form>
+      
     </div>
+    
   </div>
+  
 </div>
 <app-add-task></app-add-task>
+
+
+
+
+

@@ -16,7 +16,7 @@ export class TaskService{
     getTasks(): Observable<Task[]>{
    
        return this.http.get<Task[]>(this.taskUrl, {withCredentials: true}).pipe(
-        tap(data => console.log('All', JSON.stringify(data))),
+        tap(() => console.log('retrieved tasks')),
         catchError(this.handleError)
        );
     }

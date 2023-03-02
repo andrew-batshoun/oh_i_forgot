@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from './task';
 import { TaskService } from './task.service';
-import { faPen, faBan, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faBan, faSave ,faTrash} from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-task-list',
@@ -16,16 +17,20 @@ export class TaskListComponent implements OnInit {
   newTask: Task;
   faPen = faPen;
   faBan = faBan;
-  faFolder = faSave
+  faFolder = faSave;
+  faTrash = faTrash;
 
   constructor(
     private formBuiler: FormBuilder,
     private taskService: TaskService
   ) {}
 
+  
+
   editForm: FormGroup;
 
   tasks: Task[] = [];
+  checkedTask : Task[];
 
   ngOnInit(): void {
     this.editForm = this.formBuiler.group({
@@ -39,32 +44,34 @@ export class TaskListComponent implements OnInit {
       next: (tasks) => (this.tasks = tasks),
       error: (err) => (this.errorMessage = err),
     });
+    
   }
 
-  showRemove(event: any, task: Task): void {
-    this.tasks.forEach((element) => {
-      element.checked = false;
-    });
-    if (event.currentTarget.checked) {
-      task.checked = true;
-    }
+  
+
+
+  showRemove(): void {
+    
+    
+    console.log(this.tasks);
   }
 
-  deleteTask(id: number): void {
-    let string = '';
-    if (localStorage.getItem('lang') === 'de') {
-      string = 'Sind Sie sicher, dass Sie das löschen möchten?';
-    } else if (localStorage.getItem('lang') === 'es') {
-      string = '¿Estás seguro de que quieres eliminar?';
-    } else {
-      string = 'Are you sure you want to delete?';
-    }
-    if (confirm(string)) {
-      this.taskService.deleteTask(id).subscribe({
+ 
+
+  deleteTask(): void {
+    this.checkedTask = this.tasks.filter( task => task.checked);
+    for(var check in this.checkedTask){
+      this.taskService.deleteTask(this.checkedTask[check].id).subscribe({
         next: () => this.reloadPage(),
         error: (err) => (this.errorMessage = err),
       });
+
     }
+    
+  }
+
+  cancelDelete(){
+    this.tasks.forEach( task => task.checked = false);
   }
 
   editing(task: any): void {
