@@ -10,13 +10,6 @@
 />
 
 <div class="inbox">
-  <button 
-    class="btn btn-outline-danger btn-sm delete"
-    (click)="deleteTask()"
-   
-    >
-    <fa-icon [icon]="faTrash"></fa-icon>
-    </button>
   <div class="title">
     <h5>Tasks</h5>
   </div>
@@ -24,8 +17,8 @@
     <input type="checkbox" [(ngModel)]="task.checked" />
     <p *ngIf="!task.isEdit">
       {{ task.description }} <br />
-      <span class="due">{{ "Due Date" | translate }}:</span>
-      {{ task.dueDate | date : "shortDate" }}
+      <span class="due">{{ "Due Date" | translate }}:  </span>
+      <span  [ngStyle]="{'color':getColor(task.dueDate)}">{{ task.dueDate | date : "shortDate" }}</span>
     </p>
 
     <button
@@ -36,11 +29,22 @@
     >
       <fa-icon [icon]="faPen"></fa-icon>
     </button>
-
-    
+    <button
+      *ngIf="!task.isEdit"
+      type="button"
+      attr.id="removeTask-{{ i }}"
+      class="btn btn-outline-danger btn-sm"
+      (click)="deleteSingleTask(task.id)"
+    >
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
 
     <div *ngIf="task.isEdit" class="formcontainer">
-      <form [formGroup]="editForm" class="form-horizontal" (ngSubmit)="(editSubmit(task))">
+      <form
+        [formGroup]="editForm"
+        class="form-horizontal"
+        (ngSubmit)="editSubmit(task)"
+      >
         <input type="text" class="form-control" formControlName="description" />
 
         <input
@@ -50,35 +54,28 @@
           formControlName="dueDate"
         />
 
-        
-          <button
-            type="button"
-            class="btn btn-outline-primary btn-sm editSave"
-            attr.id="submitEdit-{{ i }}"
-            (click)="editSubmit(task)"
-          >
+        <button
+          type="button"
+          class="btn btn-outline-primary btn-sm editSave"
+          attr.id="submitEdit-{{ i }}"
+          (click)="editSubmit(task)"
+        >
           <fa-icon [icon]="faFolder"></fa-icon>
-          </button>
+        </button>
 
-          <button
-            type="button"
-            class="btn btn-outline-danger btn-sm cancel"
-            attr.id="cancelEdit-{{ i }}"
-            (click)="task.isEdit = false"
-          >
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm cancel"
+          attr.id="cancelEdit-{{ i }}"
+          (click)="task.isEdit = false"
+        >
           <fa-icon [icon]="faBan"></fa-icon>
-          </button>
-        
+        </button>
       </form>
-      
     </div>
-    
   </div>
-  
+  <button *ngIf="tasks.length > 1" class="btn btn-danger delete" (click)="deleteTasks()" [disabled]="">
+    Delete Checked Tasks
+  </button>
 </div>
 <app-add-task></app-add-task>
-
-
-
-
-

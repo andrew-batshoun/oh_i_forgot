@@ -19,6 +19,7 @@ export class TaskListComponent implements OnInit {
   faBan = faBan;
   faFolder = faSave;
   faTrash = faTrash;
+  currentDate = new Date();
 
   constructor(
     private formBuiler: FormBuilder,
@@ -56,9 +57,24 @@ export class TaskListComponent implements OnInit {
     console.log(this.tasks);
   }
 
- 
+  deleteSingleTask(id: number): void{
+    let string ="";
+    if(localStorage.getItem('lang') === 'de'){
+      string = "Sind Sie sicher, dass Sie das löschen möchten?";
+    }else if(localStorage.getItem('lang') === 'es'){
+      string = "¿Estás seguro de que quieres eliminar?";
+    }else{
+      string = "Are you sure you want to delete?"
+    }
+    if(confirm(string)){
+      this.taskService.deleteTask(id).subscribe({
+        next: () => this.reloadPage(),
+        error: err => this.errorMessage = err
+      });
+    }
+  }
 
-  deleteTask(): void {
+  deleteTasks(): void {
     this.checkedTask = this.tasks.filter( task => task.checked);
     for(var check in this.checkedTask){
       this.taskService.deleteTask(this.checkedTask[check].id).subscribe({
@@ -70,9 +86,9 @@ export class TaskListComponent implements OnInit {
     
   }
 
-  cancelDelete(){
-    this.tasks.forEach( task => task.checked = false);
-  }
+  // cancelDelete(){
+  //   this.tasks.forEach( task => task.checked = false);
+  // }
 
   editing(task: any): void {
     this.tasks.forEach((element) => {
@@ -107,5 +123,17 @@ export class TaskListComponent implements OnInit {
 
   reloadPage() {
     window.location.reload();
+  }
+
+  getColor(date: Date){
+    
+    console.log(date);
+    console.log(this.currentDate );
+
+
+    if( new Date(date) < this.currentDate ){
+      return 'red';
+    }
+    return 'black'; 
   }
 }
