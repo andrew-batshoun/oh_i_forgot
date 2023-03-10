@@ -40,18 +40,21 @@
       </ul>
     </div>
   </div>
-  <div class="col-1">
-    <select
-      class="custom-select"
-      (change)="changeLang($any($event.target).value)"
-    >
-      <option value="en" [selected]="lang == 'en'">English</option>
-      <option value="de" [selected]="lang == 'de'">Deutsch</option>
-      <option value="es" [selected]="lang == 'es'">Spanish</option>
-    </select>
-  </div>
+  
 </nav>
 <br />
-<div class="container">
+<div class="container content">
   <router-outlet></router-outlet>
 </div>
+<footer>
+  <div class="col-1">
+  <select
+    class="custom-select"
+    (change)="changeLang($any($event.target).value)"
+  >
+    <option value="en" [selected]="lang == 'en'">English</option>
+    <option value="de" [selected]="lang == 'de'">Deutsch</option>
+    <option value="es" [selected]="lang == 'es'">Spanish</option>
+  </select>
+</div>
+</footer>

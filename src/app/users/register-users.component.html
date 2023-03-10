@@ -1,19 +1,21 @@
-<div class="reg-form">
-  <h4>{{"Create an account" | translate}}</h4>
+<div class="card text-center ">
+  <br>
+  <h1 class="h3 mb-3 font-weight-normal">{{"Create an account" | translate}}</h1>
 
   <br />
 
   <!-- Start of register form -->
+
   <form
     [formGroup]="userForm"
     (ngSubmit)="(registerUser)"
-    class="form-horizontal"
+    class="card-body"
   >
     <input type="hidden" ng-model="ctrl.user.id" />
     <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-2 control-lable" for="username">{{"Username" | translate}}</label>
-        <div class="col-md-7">
+      <div class=" col-md-12">
+        <label class="col-md-12 " for="username">{{"Username" | translate}}</label>
+        <div class="col-md-12">
           <input
             type="text"
             id="username"
@@ -27,9 +29,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-2 control-lable" for="email">{{"Email" | translate}} </label>
-        <div class="col-md-7">
+      <div class=" col-md-12">
+        <label class="col-md-12 " for="email">{{"Email" | translate}} </label>
+        <div class="col-md-12">
           <input
             type="email"
             id="email"
@@ -44,8 +46,8 @@
     </div>
     <div class="row">
       <div class="form-group col-md-12">
-        <label class="col-md-2 control-lable" for="password">{{"Password" | translate}} </label>
-        <div class="col-md-7">
+        <label class="col-md-12 " for="password">{{"Password" | translate}} </label>
+        <div class="col-md-12">
           <input
             type="password"
             id="password"

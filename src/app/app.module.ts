@@ -35,6 +35,8 @@ export function HttpLoaderFactory(http: HttpClient){
     }),
     SharedModule
     
+
+    
   ],
   providers: [
     {

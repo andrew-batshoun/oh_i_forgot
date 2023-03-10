@@ -6,9 +6,10 @@
     name="loginForm"
     class="form-signin"
   >
+  <br>
     <h1 class="h3 mb-3 font-weight-normal">{{"Please sign in" | translate}}</h1>
 
-    <label for="username" class="sr-only">{{"Username" | translate}}</label>
+    <label for="username" >{{"Username" | translate}}</label>
     <input
       id="username"
       name="username"
@@ -20,7 +21,8 @@
       formControlName="username"
       autofocus
     />
-    <label for="password" class="sr-only">{{"Password" | translate}}</label>
+   
+    <label for="password" >{{"Password" | translate}}</label>
     <input
       id="password"
       name="password"
@@ -31,15 +33,17 @@
       required
       formControlName="password"
     />
+    <br>
     <button
-      class="btn btn-lg btn-info btn-block"
+      class="btn btn-md btn-primary btn-block"
       id="submitLogin"
       type="submit"
       (click)="loginUser()"
     >
      {{"Sign in" | translate}}
     </button>
-    <br />
+    <br>
+    <br>
     <p class="alert alert-danger text-center" id="loginError" *ngIf="ifError">{{"Username or Password is incorrect" | translate}}</p>
   </form>
 </div>

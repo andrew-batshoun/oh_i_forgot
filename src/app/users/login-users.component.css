@@ -1,4 +1,16 @@
 .card{
-    width: 60%;
-    margin: 0, auto;
+    max-width: 400px;
+    margin: 50px auto;
+    background: rgb(242, 245, 231);
+    border-radius: 10px;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+}
+
+input{
+    width: 80%;
+    margin: 0 auto;
+}
+
+input.ng-invalid.ng-touched {
+    border: red 1px solid;
 }
